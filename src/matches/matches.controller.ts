@@ -4,22 +4,23 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { AdminGuard } from '../auth/admin.guard';
 
 @Controller('matches')
-@UseGuards(JwtAuthGuard)
 export class MatchesController {
   constructor(private readonly matchesService: MatchesService) {}
 
+  // Public - used by home page and prode page (unauthenticated users can see the fixture)
   @Get()
   async getMatches() {
     return this.matchesService.findAll();
   }
 
+  // Public - used by admin page to load tournament config
   @Get('tournament/config')
   async getTournamentConfig() {
     return this.matchesService.getTournamentConfig();
   }
 
   @Post('tournament/results')
-  @UseGuards(AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard)
   async updateTournamentResults(
     @Body() body: { champion: string; subchampion: string; topScorer: string; goldenBall?: string; goldenGlove?: string },
   ) {
@@ -27,7 +28,7 @@ export class MatchesController {
   }
 
   @Patch(':id/result')
-  @UseGuards(AdminGuard)
+  @UseGuards(JwtAuthGuard, AdminGuard)
   async updateResult(
     @Param('id') id: string,
     @Body() body: { homeScore: number; awayScore: number },
@@ -35,3 +36,4 @@ export class MatchesController {
     return this.matchesService.updateResult(id, body.homeScore, body.awayScore);
   }
 }
+
