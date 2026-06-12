@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id              String           @id @default(dbgenerated("(gen_random_uuid())::text"))
+  email           String           @unique
+  name            String
+  password        String
+  role            Role             @default(USER)
+  points          Int              @default(0)
+  exactMatches    Int              @default(0)
+  trends          Int              @default(0)
+  bonusPoints     Int              @default(0)
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @default(now()) @updatedAt
+  bonusPrediction BonusPrediction?
+  predictions     Prediction[]
+}
+
+model Match {
+  id          String       @id @default(dbgenerated("(gen_random_uuid())::text"))
+  homeTeam    String
+  awayTeam    String
+  group       String
+  round       String?
+  time        String?
+  location    String?
+  num         Int?
+  date        DateTime
+  isSpecial   Boolean      @default(false)
+  homeScore   Int?
+  awayScore   Int?
+  status      MatchStatus  @default(SCHEDULED)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now()) @updatedAt
+  predictions Prediction[]
+}
+
+model Prediction {
+  id        String   @id @default(dbgenerated("(gen_random_uuid())::text"))
+  userId    String
+  matchId   String
+  homeScore Int
+  awayScore Int
+  points    Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  match     Match    @relation(fields: [matchId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+
+  @@unique([userId, matchId])
+}
+
+model BonusPrediction {
+  id          String   @id @default(dbgenerated("(gen_random_uuid())::text"))
+  userId      String   @unique
+  champion    String?
+  subchampion String?
+  topScorer   String?
+  goldenBall  String?
+  goldenGlove String?
+  points      Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum MatchStatus {
+  SCHEDULED
+  IN_PROGRESS
+  FINISHED
+}
+
+model TournamentConfig {
+  id          String   @id @default("global")
+  champion    String?
+  subchampion String?
+  topScorer   String?
+  goldenBall  String?
+  goldenGlove String?
+  updatedAt   DateTime @default(now()) @updatedAt
+}
+
+
