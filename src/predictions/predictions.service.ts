@@ -10,9 +10,8 @@ export class PredictionsService {
   ) {}
 
   getLockLimit(matchDate: Date) {
-    const dayBefore = new Date(matchDate.getTime() - 24 * 60 * 60 * 1000);
-    dayBefore.setHours(23, 59, 59, 999);
-    return dayBefore;
+    // Close predictions 10 minutes before the match start time
+    return new Date(matchDate.getTime() - 10 * 60 * 1000);
   }
 
   async getUserPredictions(userId: string) {
