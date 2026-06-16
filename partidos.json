@@ -4,7 +4,7 @@
     {
       "round": "Fecha 1",
       "date": "2026-06-11",
-      "time": "13:00 UTC-6",
+      "time": "16:00 UTC-3",
       "team1": "México",
       "team2": "Sudáfrica",
       "group": "Grupo A",
@@ -13,7 +13,7 @@
     {
       "round": "Fecha 1",
       "date": "2026-06-11",
-      "time": "20:00 UTC-6",
+      "time": "23:00 UTC-3",
       "team1": "Corea del Sur",
       "team2": "República Checa",
       "group": "Grupo A",
@@ -22,7 +22,7 @@
     {
       "round": "Fecha 8",
       "date": "2026-06-18",
-      "time": "12:00 UTC-4",
+      "time": "13:00 UTC-3",
       "team1": "República Checa",
       "team2": "Sudáfrica",
       "group": "Grupo A",
@@ -31,7 +31,7 @@
     {
       "round": "Fecha 8",
       "date": "2026-06-18",
-      "time": "19:00 UTC-6",
+      "time": "22:00 UTC-3",
       "team1": "México",
       "team2": "Corea del Sur",
       "group": "Grupo A",
@@ -40,7 +40,7 @@
     {
       "round": "Fecha 14",
       "date": "2026-06-24",
-      "time": "19:00 UTC-6",
+      "time": "22:00 UTC-3",
       "team1": "República Checa",
       "team2": "México",
       "group": "Grupo A",
@@ -49,7 +49,7 @@
     {
       "round": "Fecha 14",
       "date": "2026-06-24",
-      "time": "19:00 UTC-6",
+      "time": "22:00 UTC-3",
       "team1": "Sudáfrica",
       "team2": "Corea del Sur",
       "group": "Grupo A",
@@ -58,7 +58,7 @@
     {
       "round": "Fecha 2",
       "date": "2026-06-12",
-      "time": "15:00 UTC-4",
+      "time": "16:00 UTC-3",
       "team1": "Canadá",
       "team2": "Bosnia y Herzegovina",
       "group": "Grupo B",
@@ -67,7 +67,7 @@
     {
       "round": "Fecha 3",
       "date": "2026-06-13",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "Catar",
       "team2": "Suiza",
       "group": "Grupo B",
@@ -76,7 +76,7 @@
     {
       "round": "Fecha 8",
       "date": "2026-06-18",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "Suiza",
       "team2": "Bosnia y Herzegovina",
       "group": "Grupo B",
@@ -85,7 +85,7 @@
     {
       "round": "Fecha 8",
       "date": "2026-06-18",
-      "time": "15:00 UTC-7",
+      "time": "19:00 UTC-3",
       "team1": "Canadá",
       "team2": "Catar",
       "group": "Grupo B",
@@ -94,7 +94,7 @@
     {
       "round": "Fecha 14",
       "date": "2026-06-24",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "Suiza",
       "team2": "Canadá",
       "group": "Grupo B",
@@ -103,7 +103,7 @@
     {
       "round": "Fecha 14",
       "date": "2026-06-24",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "Bosnia y Herzegovina",
       "team2": "Catar",
       "group": "Grupo B",
@@ -112,7 +112,7 @@
     {
       "round": "Fecha 3",
       "date": "2026-06-13",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "Brasil",
       "team2": "Marruecos",
       "group": "Grupo C",
@@ -121,7 +121,7 @@
     {
       "round": "Fecha 3",
       "date": "2026-06-13",
-      "time": "21:00 UTC-4",
+      "time": "22:00 UTC-3",
       "team1": "Haití",
       "team2": "Escocia",
       "group": "Grupo C",
@@ -130,7 +130,7 @@
     {
       "round": "Fecha 9",
       "date": "2026-06-19",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "Escocia",
       "team2": "Marruecos",
       "group": "Grupo C",
@@ -139,7 +139,7 @@
     {
       "round": "Fecha 9",
       "date": "2026-06-19",
-      "time": "20:30 UTC-4",
+      "time": "21:30 UTC-3",
       "team1": "Brasil",
       "team2": "Haití",
       "group": "Grupo C",
@@ -148,7 +148,7 @@
     {
       "round": "Fecha 14",
       "date": "2026-06-24",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "Escocia",
       "team2": "Brasil",
       "group": "Grupo C",
@@ -157,7 +157,7 @@
     {
       "round": "Fecha 14",
       "date": "2026-06-24",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "Marruecos",
       "team2": "Haití",
       "group": "Grupo C",
@@ -166,7 +166,7 @@
     {
       "round": "Fecha 2",
       "date": "2026-06-12",
-      "time": "18:00 UTC-7",
+      "time": "22:00 UTC-3",
       "team1": "Estados Unidos",
       "team2": "Paraguay",
       "group": "Grupo D",
@@ -174,8 +174,8 @@
     },
     {
       "round": "Fecha 3",
-      "date": "2026-06-13",
-      "time": "21:00 UTC-7",
+      "date": "2026-06-14",
+      "time": "01:00 UTC-3",
       "team1": "Australia",
       "team2": "Turquía",
       "group": "Grupo D",
@@ -184,7 +184,7 @@
     {
       "round": "Fecha 9",
       "date": "2026-06-19",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "Estados Unidos",
       "team2": "Australia",
       "group": "Grupo D",
@@ -192,8 +192,8 @@
     },
     {
       "round": "Fecha 9",
-      "date": "2026-06-19",
-      "time": "20:00 UTC-7",
+      "date": "2026-06-20",
+      "time": "00:00 UTC-3",
       "team1": "Turquía",
       "team2": "Paraguay",
       "group": "Grupo D",
@@ -202,7 +202,7 @@
     {
       "round": "Fecha 15",
       "date": "2026-06-25",
-      "time": "19:00 UTC-7",
+      "time": "23:00 UTC-3",
       "team1": "Turquía",
       "team2": "Estados Unidos",
       "group": "Grupo D",
@@ -211,7 +211,7 @@
     {
       "round": "Fecha 15",
       "date": "2026-06-25",
-      "time": "19:00 UTC-7",
+      "time": "23:00 UTC-3",
       "team1": "Paraguay",
       "team2": "Australia",
       "group": "Grupo D",
@@ -220,7 +220,7 @@
     {
       "round": "Fecha 4",
       "date": "2026-06-14",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "Alemania",
       "team2": "Curazao",
       "group": "Grupo E",
@@ -229,7 +229,7 @@
     {
       "round": "Fecha 4",
       "date": "2026-06-14",
-      "time": "19:00 UTC-4",
+      "time": "20:00 UTC-3",
       "team1": "Costa de Marfil",
       "team2": "Ecuador",
       "group": "Grupo E",
@@ -238,7 +238,7 @@
     {
       "round": "Fecha 10",
       "date": "2026-06-20",
-      "time": "16:00 UTC-4",
+      "time": "17:00 UTC-3",
       "team1": "Alemania",
       "team2": "Costa de Marfil",
       "group": "Grupo E",
@@ -247,7 +247,7 @@
     {
       "round": "Fecha 10",
       "date": "2026-06-20",
-      "time": "19:00 UTC-5",
+      "time": "21:00 UTC-3",
       "team1": "Ecuador",
       "team2": "Curazao",
       "group": "Grupo E",
@@ -256,7 +256,7 @@
     {
       "round": "Fecha 15",
       "date": "2026-06-25",
-      "time": "16:00 UTC-4",
+      "time": "17:00 UTC-3",
       "team1": "Curazao",
       "team2": "Costa de Marfil",
       "group": "Grupo E",
@@ -265,7 +265,7 @@
     {
       "round": "Fecha 15",
       "date": "2026-06-25",
-      "time": "16:00 UTC-4",
+      "time": "17:00 UTC-3",
       "team1": "Ecuador",
       "team2": "Alemania",
       "group": "Grupo E",
@@ -274,7 +274,7 @@
     {
       "round": "Fecha 4",
       "date": "2026-06-14",
-      "time": "15:00 UTC-5",
+      "time": "17:00 UTC-3",
       "team1": "Países Bajos",
       "team2": "Japón",
       "group": "Grupo F",
@@ -283,7 +283,7 @@
     {
       "round": "Fecha 4",
       "date": "2026-06-14",
-      "time": "20:00 UTC-6",
+      "time": "23:00 UTC-3",
       "team1": "Suecia",
       "team2": "Túnez",
       "group": "Grupo F",
@@ -292,7 +292,7 @@
     {
       "round": "Fecha 10",
       "date": "2026-06-20",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "Países Bajos",
       "team2": "Suecia",
       "group": "Grupo F",
@@ -300,8 +300,8 @@
     },
     {
       "round": "Fecha 10",
-      "date": "2026-06-20",
-      "time": "22:00 UTC-6",
+      "date": "2026-06-21",
+      "time": "01:00 UTC-3",
       "team1": "Túnez",
       "team2": "Japón",
       "group": "Grupo F",
@@ -310,7 +310,7 @@
     {
       "round": "Fecha 15",
       "date": "2026-06-25",
-      "time": "18:00 UTC-5",
+      "time": "20:00 UTC-3",
       "team1": "Japón",
       "team2": "Suecia",
       "group": "Grupo F",
@@ -319,7 +319,7 @@
     {
       "round": "Fecha 15",
       "date": "2026-06-25",
-      "time": "18:00 UTC-5",
+      "time": "20:00 UTC-3",
       "team1": "Túnez",
       "team2": "Países Bajos",
       "group": "Grupo F",
@@ -328,7 +328,7 @@
     {
       "round": "Fecha 5",
       "date": "2026-06-15",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "Bélgica",
       "team2": "Egipto",
       "group": "Grupo G",
@@ -337,7 +337,7 @@
     {
       "round": "Fecha 5",
       "date": "2026-06-15",
-      "time": "18:00 UTC-7",
+      "time": "22:00 UTC-3",
       "team1": "Irán",
       "team2": "Nueva Zelanda",
       "group": "Grupo G",
@@ -346,7 +346,7 @@
     {
       "round": "Fecha 11",
       "date": "2026-06-21",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "Bélgica",
       "team2": "Irán",
       "group": "Grupo G",
@@ -355,7 +355,7 @@
     {
       "round": "Fecha 11",
       "date": "2026-06-21",
-      "time": "18:00 UTC-7",
+      "time": "22:00 UTC-3",
       "team1": "Nueva Zelanda",
       "team2": "Egipto",
       "group": "Grupo G",
@@ -363,8 +363,8 @@
     },
     {
       "round": "Fecha 16",
-      "date": "2026-06-26",
-      "time": "20:00 UTC-7",
+      "date": "2026-06-27",
+      "time": "00:00 UTC-3",
       "team1": "Egipto",
       "team2": "Irán",
       "group": "Grupo G",
@@ -372,8 +372,8 @@
     },
     {
       "round": "Fecha 16",
-      "date": "2026-06-26",
-      "time": "20:00 UTC-7",
+      "date": "2026-06-27",
+      "time": "00:00 UTC-3",
       "team1": "Nueva Zelanda",
       "team2": "Bélgica",
       "group": "Grupo G",
@@ -382,7 +382,7 @@
     {
       "round": "Fecha 5",
       "date": "2026-06-15",
-      "time": "12:00 UTC-4",
+      "time": "13:00 UTC-3",
       "team1": "España",
       "team2": "Cabo Verde",
       "group": "Grupo H",
@@ -391,7 +391,7 @@
     {
       "round": "Fecha 5",
       "date": "2026-06-15",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "Arabia Saudita",
       "team2": "Uruguay",
       "group": "Grupo H",
@@ -400,7 +400,7 @@
     {
       "round": "Fecha 11",
       "date": "2026-06-21",
-      "time": "12:00 UTC-4",
+      "time": "13:00 UTC-3",
       "team1": "España",
       "team2": "Arabia Saudita",
       "group": "Grupo H",
@@ -409,7 +409,7 @@
     {
       "round": "Fecha 11",
       "date": "2026-06-21",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "Uruguay",
       "team2": "Cabo Verde",
       "group": "Grupo H",
@@ -418,7 +418,7 @@
     {
       "round": "Fecha 16",
       "date": "2026-06-26",
-      "time": "19:00 UTC-5",
+      "time": "21:00 UTC-3",
       "team1": "Cabo Verde",
       "team2": "Arabia Saudita",
       "group": "Grupo H",
@@ -427,7 +427,7 @@
     {
       "round": "Fecha 16",
       "date": "2026-06-26",
-      "time": "18:00 UTC-6",
+      "time": "21:00 UTC-3",
       "team1": "Uruguay",
       "team2": "España",
       "group": "Grupo H",
@@ -436,7 +436,7 @@
     {
       "round": "Fecha 6",
       "date": "2026-06-16",
-      "time": "15:00 UTC-4",
+      "time": "16:00 UTC-3",
       "team1": "Francia",
       "team2": "Senegal",
       "group": "Grupo I",
@@ -445,7 +445,7 @@
     {
       "round": "Fecha 6",
       "date": "2026-06-16",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "Irak",
       "team2": "Noruega",
       "group": "Grupo I",
@@ -454,7 +454,7 @@
     {
       "round": "Fecha 12",
       "date": "2026-06-22",
-      "time": "17:00 UTC-4",
+      "time": "18:00 UTC-3",
       "team1": "Francia",
       "team2": "Irak",
       "group": "Grupo I",
@@ -463,7 +463,7 @@
     {
       "round": "Fecha 12",
       "date": "2026-06-22",
-      "time": "20:00 UTC-4",
+      "time": "21:00 UTC-3",
       "team1": "Noruega",
       "team2": "Senegal",
       "group": "Grupo I",
@@ -472,7 +472,7 @@
     {
       "round": "Fecha 16",
       "date": "2026-06-26",
-      "time": "15:00 UTC-4",
+      "time": "16:00 UTC-3",
       "team1": "Noruega",
       "team2": "Francia",
       "group": "Grupo I",
@@ -481,7 +481,7 @@
     {
       "round": "Fecha 16",
       "date": "2026-06-26",
-      "time": "15:00 UTC-4",
+      "time": "16:00 UTC-3",
       "team1": "Senegal",
       "team2": "Irak",
       "group": "Grupo I",
@@ -490,7 +490,7 @@
     {
       "round": "Fecha 6",
       "date": "2026-06-16",
-      "time": "20:00 UTC-5",
+      "time": "22:00 UTC-3",
       "team1": "Argentina",
       "team2": "Argelia",
       "group": "Grupo J",
@@ -498,8 +498,8 @@
     },
     {
       "round": "Fecha 6",
-      "date": "2026-06-16",
-      "time": "21:00 UTC-7",
+      "date": "2026-06-17",
+      "time": "01:00 UTC-3",
       "team1": "Austria",
       "team2": "Jordania",
       "group": "Grupo J",
@@ -508,7 +508,7 @@
     {
       "round": "Fecha 12",
       "date": "2026-06-22",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "Argentina",
       "team2": "Austria",
       "group": "Grupo J",
@@ -516,8 +516,8 @@
     },
     {
       "round": "Fecha 12",
-      "date": "2026-06-22",
-      "time": "20:00 UTC-7",
+      "date": "2026-06-23",
+      "time": "00:00 UTC-3",
       "team1": "Jordania",
       "team2": "Argelia",
       "group": "Grupo J",
@@ -526,7 +526,7 @@
     {
       "round": "Fecha 17",
       "date": "2026-06-27",
-      "time": "21:00 UTC-5",
+      "time": "23:00 UTC-3",
       "team1": "Argelia",
       "team2": "Austria",
       "group": "Grupo J",
@@ -535,7 +535,7 @@
     {
       "round": "Fecha 17",
       "date": "2026-06-27",
-      "time": "21:00 UTC-5",
+      "time": "23:00 UTC-3",
       "team1": "Jordania",
       "team2": "Argentina",
       "group": "Grupo J",
@@ -544,7 +544,7 @@
     {
       "round": "Fecha 7",
       "date": "2026-06-17",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "Portugal",
       "team2": "RD Congo",
       "group": "Grupo K",
@@ -553,7 +553,7 @@
     {
       "round": "Fecha 7",
       "date": "2026-06-17",
-      "time": "20:00 UTC-6",
+      "time": "23:00 UTC-3",
       "team1": "Uzbekistán",
       "team2": "Colombia",
       "group": "Grupo K",
@@ -562,7 +562,7 @@
     {
       "round": "Fecha 13",
       "date": "2026-06-23",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "Portugal",
       "team2": "Uzbekistán",
       "group": "Grupo K",
@@ -571,7 +571,7 @@
     {
       "round": "Fecha 13",
       "date": "2026-06-23",
-      "time": "20:00 UTC-6",
+      "time": "23:00 UTC-3",
       "team1": "Colombia",
       "team2": "RD Congo",
       "group": "Grupo K",
@@ -580,7 +580,7 @@
     {
       "round": "Fecha 17",
       "date": "2026-06-27",
-      "time": "19:30 UTC-4",
+      "time": "20:30 UTC-3",
       "team1": "Colombia",
       "team2": "Portugal",
       "group": "Grupo K",
@@ -589,7 +589,7 @@
     {
       "round": "Fecha 17",
       "date": "2026-06-27",
-      "time": "19:30 UTC-4",
+      "time": "20:30 UTC-3",
       "team1": "RD Congo",
       "team2": "Uzbekistán",
       "group": "Grupo K",
@@ -598,7 +598,7 @@
     {
       "round": "Fecha 7",
       "date": "2026-06-17",
-      "time": "15:00 UTC-5",
+      "time": "17:00 UTC-3",
       "team1": "Inglaterra",
       "team2": "Croacia",
       "group": "Grupo L",
@@ -607,7 +607,7 @@
     {
       "round": "Fecha 7",
       "date": "2026-06-17",
-      "time": "19:00 UTC-4",
+      "time": "20:00 UTC-3",
       "team1": "Ghana",
       "team2": "Panamá",
       "group": "Grupo L",
@@ -616,7 +616,7 @@
     {
       "round": "Fecha 13",
       "date": "2026-06-23",
-      "time": "16:00 UTC-4",
+      "time": "17:00 UTC-3",
       "team1": "Inglaterra",
       "team2": "Ghana",
       "group": "Grupo L",
@@ -625,7 +625,7 @@
     {
       "round": "Fecha 13",
       "date": "2026-06-23",
-      "time": "19:00 UTC-4",
+      "time": "20:00 UTC-3",
       "team1": "Panamá",
       "team2": "Croacia",
       "group": "Grupo L",
@@ -634,7 +634,7 @@
     {
       "round": "Fecha 17",
       "date": "2026-06-27",
-      "time": "17:00 UTC-4",
+      "time": "18:00 UTC-3",
       "team1": "Panamá",
       "team2": "Inglaterra",
       "group": "Grupo L",
@@ -643,7 +643,7 @@
     {
       "round": "Fecha 17",
       "date": "2026-06-27",
-      "time": "17:00 UTC-4",
+      "time": "18:00 UTC-3",
       "team1": "Croacia",
       "team2": "Ghana",
       "group": "Grupo L",
@@ -653,7 +653,7 @@
       "round": "16avos de Final",
       "num": 73,
       "date": "2026-06-28",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "2A",
       "team2": "2B",
       "ground": "Los Angeles (Inglewood)"
@@ -662,7 +662,7 @@
       "round": "16avos de Final",
       "num": 74,
       "date": "2026-06-29",
-      "time": "16:30 UTC-4",
+      "time": "17:30 UTC-3",
       "team1": "1E",
       "team2": "3A/B/C/D/F",
       "ground": "Boston (Foxborough)"
@@ -671,7 +671,7 @@
       "round": "16avos de Final",
       "num": 75,
       "date": "2026-06-29",
-      "time": "19:00 UTC-6",
+      "time": "22:00 UTC-3",
       "team1": "1F",
       "team2": "2C",
       "ground": "Monterrey (Guadalupe)"
@@ -680,7 +680,7 @@
       "round": "16avos de Final",
       "num": 76,
       "date": "2026-06-29",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "1C",
       "team2": "2F",
       "ground": "Houston"
@@ -689,7 +689,7 @@
       "round": "16avos de Final",
       "num": 77,
       "date": "2026-06-30",
-      "time": "17:00 UTC-4",
+      "time": "18:00 UTC-3",
       "team1": "1I",
       "team2": "3C/D/F/G/H",
       "ground": "New York/New Jersey (East Rutherford)"
@@ -698,7 +698,7 @@
       "round": "16avos de Final",
       "num": 78,
       "date": "2026-06-30",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "2E",
       "team2": "2I",
       "ground": "Dallas (Arlington)"
@@ -707,7 +707,7 @@
       "round": "16avos de Final",
       "num": 79,
       "date": "2026-06-30",
-      "time": "19:00 UTC-6",
+      "time": "22:00 UTC-3",
       "team1": "1A",
       "team2": "3C/E/F/H/I",
       "ground": "Mexico City"
@@ -716,7 +716,7 @@
       "round": "16avos de Final",
       "num": 80,
       "date": "2026-07-01",
-      "time": "12:00 UTC-4",
+      "time": "13:00 UTC-3",
       "team1": "1L",
       "team2": "3E/H/I/J/K",
       "ground": "Atlanta"
@@ -725,7 +725,7 @@
       "round": "16avos de Final",
       "num": 81,
       "date": "2026-07-01",
-      "time": "17:00 UTC-7",
+      "time": "21:00 UTC-3",
       "team1": "1D",
       "team2": "3B/E/F/I/J",
       "ground": "San Francisco Bay Area (Santa Clara)"
@@ -734,7 +734,7 @@
       "round": "16avos de Final",
       "num": 82,
       "date": "2026-07-01",
-      "time": "13:00 UTC-7",
+      "time": "17:00 UTC-3",
       "team1": "1G",
       "team2": "3A/E/H/I/J",
       "ground": "Seattle"
@@ -743,7 +743,7 @@
       "round": "16avos de Final",
       "num": 83,
       "date": "2026-07-02",
-      "time": "19:00 UTC-4",
+      "time": "20:00 UTC-3",
       "team1": "2K",
       "team2": "2L",
       "ground": "Toronto"
@@ -752,7 +752,7 @@
       "round": "16avos de Final",
       "num": 84,
       "date": "2026-07-02",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "1H",
       "team2": "2J",
       "ground": "Los Angeles (Inglewood)"
@@ -760,8 +760,8 @@
     {
       "round": "16avos de Final",
       "num": 85,
-      "date": "2026-07-02",
-      "time": "20:00 UTC-7",
+      "date": "2026-07-03",
+      "time": "00:00 UTC-3",
       "team1": "1B",
       "team2": "3E/F/G/I/J",
       "ground": "Vancouver"
@@ -770,7 +770,7 @@
       "round": "16avos de Final",
       "num": 86,
       "date": "2026-07-03",
-      "time": "18:00 UTC-4",
+      "time": "19:00 UTC-3",
       "team1": "1J",
       "team2": "2H",
       "ground": "Miami (Miami Gardens)"
@@ -779,7 +779,7 @@
       "round": "16avos de Final",
       "num": 87,
       "date": "2026-07-03",
-      "time": "20:30 UTC-5",
+      "time": "22:30 UTC-3",
       "team1": "1K",
       "team2": "3D/E/I/J/L",
       "ground": "Kansas City"
@@ -788,7 +788,7 @@
       "round": "16avos de Final",
       "num": 88,
       "date": "2026-07-03",
-      "time": "13:00 UTC-5",
+      "time": "15:00 UTC-3",
       "team1": "2D",
       "team2": "2G",
       "ground": "Dallas (Arlington)"
@@ -797,7 +797,7 @@
       "round": "Octavos de Final",
       "num": 89,
       "date": "2026-07-04",
-      "time": "17:00 UTC-4",
+      "time": "18:00 UTC-3",
       "team1": "W74",
       "team2": "W77",
       "ground": "Philadelphia"
@@ -806,7 +806,7 @@
       "round": "Octavos de Final",
       "num": 90,
       "date": "2026-07-04",
-      "time": "12:00 UTC-5",
+      "time": "14:00 UTC-3",
       "team1": "W73",
       "team2": "W75",
       "ground": "Houston"
@@ -815,7 +815,7 @@
       "round": "Octavos de Final",
       "num": 91,
       "date": "2026-07-05",
-      "time": "16:00 UTC-4",
+      "time": "17:00 UTC-3",
       "team1": "W76",
       "team2": "W78",
       "ground": "New York/New Jersey (East Rutherford)"
@@ -824,7 +824,7 @@
       "round": "Octavos de Final",
       "num": 92,
       "date": "2026-07-05",
-      "time": "18:00 UTC-6",
+      "time": "21:00 UTC-3",
       "team1": "W79",
       "team2": "W80",
       "ground": "Mexico City"
@@ -833,7 +833,7 @@
       "round": "Octavos de Final",
       "num": 93,
       "date": "2026-07-06",
-      "time": "14:00 UTC-5",
+      "time": "16:00 UTC-3",
       "team1": "W83",
       "team2": "W84",
       "ground": "Dallas (Arlington)"
@@ -842,7 +842,7 @@
       "round": "Octavos de Final",
       "num": 94,
       "date": "2026-07-06",
-      "time": "17:00 UTC-7",
+      "time": "21:00 UTC-3",
       "team1": "W81",
       "team2": "W82",
       "ground": "Seattle"
@@ -851,7 +851,7 @@
       "round": "Octavos de Final",
       "num": 95,
       "date": "2026-07-07",
-      "time": "12:00 UTC-4",
+      "time": "13:00 UTC-3",
       "team1": "W86",
       "team2": "W88",
       "ground": "Atlanta"
@@ -860,7 +860,7 @@
       "round": "Octavos de Final",
       "num": 96,
       "date": "2026-07-07",
-      "time": "13:00 UTC-7",
+      "time": "17:00 UTC-3",
       "team1": "W85",
       "team2": "W87",
       "ground": "Vancouver"
@@ -869,7 +869,7 @@
       "round": "Cuartos de Final",
       "num": 97,
       "date": "2026-07-09",
-      "time": "16:00 UTC-4",
+      "time": "17:00 UTC-3",
       "team1": "W89",
       "team2": "W90",
       "ground": "Boston (Foxborough)"
@@ -878,7 +878,7 @@
       "round": "Cuartos de Final",
       "num": 98,
       "date": "2026-07-10",
-      "time": "12:00 UTC-7",
+      "time": "16:00 UTC-3",
       "team1": "W93",
       "team2": "W94",
       "ground": "Los Angeles (Inglewood)"
@@ -887,7 +887,7 @@
       "round": "Cuartos de Final",
       "num": 99,
       "date": "2026-07-11",
-      "time": "17:00 UTC-4",
+      "time": "18:00 UTC-3",
       "team1": "W91",
       "team2": "W92",
       "ground": "Miami (Miami Gardens)"
@@ -896,7 +896,7 @@
       "round": "Cuartos de Final",
       "num": 100,
       "date": "2026-07-11",
-      "time": "20:00 UTC-5",
+      "time": "22:00 UTC-3",
       "team1": "W95",
       "team2": "W96",
       "ground": "Kansas City"
@@ -905,7 +905,7 @@
       "round": "Semifinal",
       "num": 101,
       "date": "2026-07-14",
-      "time": "14:00 UTC-5",
+      "time": "16:00 UTC-3",
       "team1": "W97",
       "team2": "W98",
       "ground": "Dallas (Arlington)"
@@ -914,7 +914,7 @@
       "round": "Semifinal",
       "num": 102,
       "date": "2026-07-15",
-      "time": "15:00 UTC-4",
+      "time": "16:00 UTC-3",
       "team1": "W99",
       "team2": "W100",
       "ground": "Atlanta"
@@ -922,7 +922,7 @@
     {
       "round": "Tercer Puesto",
       "date": "2026-07-18",
-      "time": "17:00 UTC-4",
+      "time": "18:00 UTC-3",
       "team1": "L101",
       "team2": "L102",
       "ground": "Miami (Miami Gardens)"
@@ -930,7 +930,7 @@
     {
       "round": "Final",
       "date": "2026-07-19",
-      "time": "15:00 UTC-4",
+      "time": "16:00 UTC-3",
       "team1": "W101",
       "team2": "W102",
       "ground": "New York/New Jersey (East Rutherford)"
