@@ -20,7 +20,7 @@ export class MatchesService implements OnModuleInit {
     console.log('[Seeding] Match table is empty. Starting seeding...');
 
     try {
-      const filePath = path.join(process.cwd(), '../partidos.json');
+      const filePath = path.join(process.cwd(), './partidos.json');
       if (!fs.existsSync(filePath)) {
         console.error(`[Seeding Error] partidos.json not found at ${filePath}`);
         return;
@@ -36,6 +36,7 @@ export class MatchesService implements OnModuleInit {
         const matchId = String(matchNum);
 
         let timeStr = '12:00:00';
+        let tzOffset = 'Z';
         if (match.time) {
           const parts = match.time.split(' ');
           if (parts[0]) {
@@ -44,9 +45,19 @@ export class MatchesService implements OnModuleInit {
               timeStr = `${timeStr}:00`;
             }
           }
+          if (parts[1]) {
+            const tz = parts[1];
+            const matchOffset = tz.match(/UTC([+-]\d+)/);
+            if (matchOffset) {
+              const num = parseInt(matchOffset[1], 10);
+              const sign = num >= 0 ? '+' : '-';
+              const absNum = Math.abs(num);
+              tzOffset = `${sign}${String(absNum).padStart(2, '0')}:00`;
+            }
+          }
         }
 
-        const dateObj = new Date(`${match.date}T${timeStr}Z`);
+        const dateObj = new Date(`${match.date}T${timeStr}${tzOffset}`);
 
         await this.prisma.match.create({
           data: {
