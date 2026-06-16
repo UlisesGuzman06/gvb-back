@@ -8,7 +8,10 @@
       "team1": "México",
       "team2": "Sudáfrica",
       "group": "Grupo A",
-      "ground": "Mexico City"
+      "ground": "Mexico City",
+      "homeScore": 2,
+      "awayScore": 0,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 1",
@@ -17,7 +20,10 @@
       "team1": "Corea del Sur",
       "team2": "República Checa",
       "group": "Grupo A",
-      "ground": "Guadalajara (Zapopan)"
+      "ground": "Guadalajara (Zapopan)",
+      "homeScore": 2,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 8",
@@ -62,7 +68,10 @@
       "team1": "Canadá",
       "team2": "Bosnia y Herzegovina",
       "group": "Grupo B",
-      "ground": "Toronto"
+      "ground": "Toronto",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 3",
@@ -71,7 +80,10 @@
       "team1": "Catar",
       "team2": "Suiza",
       "group": "Grupo B",
-      "ground": "San Francisco Bay Area (Santa Clara)"
+      "ground": "San Francisco Bay Area (Santa Clara)",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 8",
@@ -116,7 +128,10 @@
       "team1": "Brasil",
       "team2": "Marruecos",
       "group": "Grupo C",
-      "ground": "New York/New Jersey (East Rutherford)"
+      "ground": "New York/New Jersey (East Rutherford)",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 3",
@@ -125,7 +140,10 @@
       "team1": "Haití",
       "team2": "Escocia",
       "group": "Grupo C",
-      "ground": "Boston (Foxborough)"
+      "ground": "Boston (Foxborough)",
+      "homeScore": 0,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 9",
@@ -170,7 +188,10 @@
       "team1": "Estados Unidos",
       "team2": "Paraguay",
       "group": "Grupo D",
-      "ground": "Los Angeles (Inglewood)"
+      "ground": "Los Angeles (Inglewood)",
+      "homeScore": 4,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 3",
@@ -179,7 +200,10 @@
       "team1": "Australia",
       "team2": "Turquía",
       "group": "Grupo D",
-      "ground": "Vancouver"
+      "ground": "Vancouver",
+      "homeScore": 2,
+      "awayScore": 0,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 9",
@@ -224,7 +248,10 @@
       "team1": "Alemania",
       "team2": "Curazao",
       "group": "Grupo E",
-      "ground": "Houston"
+      "ground": "Houston",
+      "homeScore": 7,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 4",
@@ -233,7 +260,10 @@
       "team1": "Costa de Marfil",
       "team2": "Ecuador",
       "group": "Grupo E",
-      "ground": "Philadelphia"
+      "ground": "Philadelphia",
+      "homeScore": 1,
+      "awayScore": 0,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 10",
@@ -278,7 +308,10 @@
       "team1": "Países Bajos",
       "team2": "Japón",
       "group": "Grupo F",
-      "ground": "Dallas (Arlington)"
+      "ground": "Dallas (Arlington)",
+      "homeScore": 2,
+      "awayScore": 2,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 4",
@@ -287,7 +320,10 @@
       "team1": "Suecia",
       "team2": "Túnez",
       "group": "Grupo F",
-      "ground": "Monterrey (Guadalupe)"
+      "ground": "Monterrey (Guadalupe)",
+      "homeScore": 5,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 10",
@@ -332,7 +368,10 @@
       "team1": "Bélgica",
       "team2": "Egipto",
       "group": "Grupo G",
-      "ground": "Seattle"
+      "ground": "Seattle",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 5",
@@ -341,7 +380,10 @@
       "team1": "Irán",
       "team2": "Nueva Zelanda",
       "group": "Grupo G",
-      "ground": "Los Angeles (Inglewood)"
+      "ground": "Los Angeles (Inglewood)",
+      "homeScore": 2,
+      "awayScore": 2,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 11",
@@ -386,7 +428,10 @@
       "team1": "España",
       "team2": "Cabo Verde",
       "group": "Grupo H",
-      "ground": "Atlanta"
+      "ground": "Atlanta",
+      "homeScore": 0,
+      "awayScore": 0,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 5",
@@ -395,7 +440,10 @@
       "team1": "Arabia Saudita",
       "team2": "Uruguay",
       "group": "Grupo H",
-      "ground": "Miami (Miami Gardens)"
+      "ground": "Miami (Miami Gardens)",
+      "homeScore": 1,
+      "awayScore": 1,
+      "status": "FINISHED"
     },
     {
       "round": "Fecha 11",

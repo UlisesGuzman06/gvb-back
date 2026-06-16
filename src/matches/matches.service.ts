@@ -103,7 +103,9 @@ export class MatchesService implements OnModuleInit {
             location: match.ground || 'Estadio por definir',
             num: matchNum,
             date: dateObj,
-            status: 'SCHEDULED',
+            status: match.status || 'SCHEDULED',
+            homeScore: match.homeScore !== undefined ? match.homeScore : null,
+            awayScore: match.awayScore !== undefined ? match.awayScore : null,
           },
         });
       }
