@@ -8,27 +8,60 @@ export class MatchesService implements OnModuleInit {
   constructor(private prisma: PrismaService) {}
 
   async onModuleInit() {
-    await this.seedMatchesAndMockUsers();
+    await this.manualSeed(false);
   }
 
-  async seedMatchesAndMockUsers() {
-    const matchCount = await this.prisma.match.count();
-    if (matchCount > 0) {
-      return;
+  async manualSeed(force = false) {
+    const logs: string[] = [];
+    logs.push(`[Seeding] Started seeding process...`);
+    logs.push(`process.cwd(): ${process.cwd()}`);
+    logs.push(`__dirname: ${__dirname}`);
+
+    const filePath = path.join(process.cwd(), './partidos.json');
+    logs.push(`filePath: ${filePath}`);
+    const exists = fs.existsSync(filePath);
+    logs.push(`filePath exists: ${exists}`);
+
+    const fallbackPath = path.join(__dirname, '../../partidos.json');
+    logs.push(`fallbackPath: ${fallbackPath}`);
+    const fallbackExists = fs.existsSync(fallbackPath);
+    logs.push(`fallbackPath exists: ${fallbackExists}`);
+
+    const fallbackPath2 = path.join(__dirname, '../../../partidos.json');
+    logs.push(`fallbackPath2: ${fallbackPath2}`);
+    const fallback2Exists = fs.existsSync(fallbackPath2);
+    logs.push(`fallbackPath2 exists: ${fallback2Exists}`);
+
+    if (!exists && !fallbackExists && !fallback2Exists) {
+      const errMsg = `[Seeding Error] partidos.json not found in any of the resolved paths.`;
+      console.error(errMsg);
+      logs.push(errMsg);
+      return { success: false, logs };
     }
 
-    console.log('[Seeding] Match table is empty. Starting seeding...');
+    const finalPath = exists ? filePath : (fallbackExists ? fallbackPath : fallbackPath2);
+    logs.push(`Using final file path: ${finalPath}`);
 
     try {
-      const filePath = path.join(process.cwd(), './partidos.json');
-      if (!fs.existsSync(filePath)) {
-        console.error(`[Seeding Error] partidos.json not found at ${filePath}`);
-        return;
+      const matchCount = await this.prisma.match.count();
+      logs.push(`Current database match count: ${matchCount}`);
+
+      if (matchCount > 0 && !force) {
+        logs.push(`Matches already exist. Skipping seed.`);
+        console.log(`[Seeding] Matches already exist, skipping.`);
+        return { success: true, logs };
       }
 
-      const fileContent = fs.readFileSync(filePath, 'utf8');
+      if (force) {
+        logs.push(`Force is enabled. Deleting existing matches...`);
+        const deleteRes = await this.prisma.match.deleteMany({});
+        logs.push(`Deleted ${deleteRes.count} matches.`);
+      }
+
+      const fileContent = fs.readFileSync(finalPath, 'utf8');
       const data = JSON.parse(fileContent);
       const rawMatches = data.matches || [];
+      logs.push(`Read ${rawMatches.length} matches from JSON.`);
 
       for (let idx = 0; idx < rawMatches.length; idx++) {
         const match = rawMatches[idx];
@@ -75,9 +108,15 @@ export class MatchesService implements OnModuleInit {
         });
       }
 
-      console.log(`[Seeding] Successfully seeded ${rawMatches.length} matches.`);
-    } catch (error) {
-      console.error('[Seeding Error] Failed to seed matches:', error);
+      const successMsg = `[Seeding] Successfully seeded ${rawMatches.length} matches.`;
+      console.log(successMsg);
+      logs.push(successMsg);
+      return { success: true, logs };
+    } catch (error: any) {
+      const errMsg = `[Seeding Error] Failed to seed matches: ${error.message || error}`;
+      console.error(errMsg);
+      logs.push(errMsg);
+      return { success: false, logs };
     }
   }
 
@@ -92,7 +131,7 @@ export class MatchesService implements OnModuleInit {
     return list.map(m => ({
       id: m.id,
       date: m.date.toISOString().split('T')[0],
-      time: m.time || '12:00:00',
+      time: m.date.toISOString().split('T')[1].substring(0, 8),
       location: m.location || 'Estadio Azteca',
       round: m.round || 'Grupo',
       group: m.group,

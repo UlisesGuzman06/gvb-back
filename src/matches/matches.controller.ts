@@ -7,6 +7,11 @@ import { AdminGuard } from '../auth/admin.guard';
 export class MatchesController {
   constructor(private readonly matchesService: MatchesService) {}
 
+  @Get('seed')
+  async seedMatches() {
+    return this.matchesService.manualSeed(true);
+  }
+
   // Public - used by home page and prode page (unauthenticated users can see the fixture)
   @Get()
   async getMatches() {
