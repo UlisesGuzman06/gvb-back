@@ -35,8 +35,9 @@ export class PredictionsController {
   }
 
   @Get('companion/:userId')
-  async getCompanionPredictions(@Param('userId') userId: string) {
-    return this.predictionsService.getCompanionPredictions(userId);
+  async getCompanionPredictions(@Param('userId') userId: string, @Request() req: any) {
+    const isSelf = req.user?.userId === userId;
+    return this.predictionsService.getCompanionPredictions(userId, isSelf);
   }
 
   // Admin Overrides

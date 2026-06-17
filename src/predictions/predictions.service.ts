@@ -30,7 +30,7 @@ export class PredictionsService {
     return map;
   }
 
-  async getCompanionPredictions(userId: string) {
+  async getCompanionPredictions(userId: string, isSelf = false) {
     const list = await this.prisma.prediction.findMany({
       where: { userId },
       include: { match: true },
@@ -43,8 +43,8 @@ export class PredictionsService {
       const isLocked = now.getTime() > limit.getTime() || p.match.status === 'FINISHED';
       
       map[p.matchId] = {
-        homeScore: isLocked ? p.homeScore : null,
-        awayScore: isLocked ? p.awayScore : null,
+        homeScore: (isLocked || isSelf) ? p.homeScore : null,
+        awayScore: (isLocked || isSelf) ? p.awayScore : null,
         points: p.points,
         isLocked,
       };
