@@ -34,6 +34,11 @@ export class PredictionsController {
     return this.predictionsService.saveBonusPrediction(req.user.userId, body);
   }
 
+  @Get('companion/:userId')
+  async getCompanionPredictions(@Param('userId') userId: string) {
+    return this.predictionsService.getCompanionPredictions(userId);
+  }
+
   // Admin Overrides
   @Get('user/:userId')
   @UseGuards(AdminGuard)

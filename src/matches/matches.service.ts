@@ -238,19 +238,19 @@ export class MatchesService implements OnModuleInit {
 
         if (config) {
           if (config.champion && bonus.champion === config.champion) {
-            bonusPoints += 10;
+            bonusPoints += 15;
           }
           if (config.subchampion && bonus.subchampion === config.subchampion) {
-            bonusPoints += 5;
+            bonusPoints += 10;
           }
           if (config.topScorer && bonus.topScorer && bonus.topScorer.trim().toLowerCase() === config.topScorer.trim().toLowerCase()) {
-            bonusPoints += 5;
+            bonusPoints += 10;
           }
           if (config.goldenBall && bonus.goldenBall && bonus.goldenBall.trim().toLowerCase() === config.goldenBall.trim().toLowerCase()) {
-            bonusPoints += 5;
+            bonusPoints += 10;
           }
           if (config.goldenGlove && bonus.goldenGlove && bonus.goldenGlove.trim().toLowerCase() === config.goldenGlove.trim().toLowerCase()) {
-            bonusPoints += 5;
+            bonusPoints += 10;
           }
         }
       }

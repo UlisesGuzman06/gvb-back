@@ -7,6 +7,7 @@ async function bootstrap() {
   const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:3001',
+    'http://localhost:6363',
     'https://gvb-front.vercel.app',
   ];
 
@@ -24,7 +25,7 @@ async function bootstrap() {
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
 
-  await app.listen(process.env.PORT ?? 4000);
+  await app.listen(process.env.PORT ?? 6464);
 }
 bootstrap();
 

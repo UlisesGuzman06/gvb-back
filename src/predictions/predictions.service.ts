@@ -30,6 +30,28 @@ export class PredictionsService {
     return map;
   }
 
+  async getCompanionPredictions(userId: string) {
+    const list = await this.prisma.prediction.findMany({
+      where: { userId },
+      include: { match: true },
+    });
+    
+    const map: Record<string, { homeScore: number | null; awayScore: number | null; points: number; isLocked: boolean }> = {};
+    const now = new Date();
+    for (const p of list) {
+      const limit = this.getLockLimit(p.match.date);
+      const isLocked = now.getTime() > limit.getTime() || p.match.status === 'FINISHED';
+      
+      map[p.matchId] = {
+        homeScore: isLocked ? p.homeScore : null,
+        awayScore: isLocked ? p.awayScore : null,
+        points: p.points,
+        isLocked,
+      };
+    }
+    return map;
+  }
+
   async savePredictions(userId: string, predictions: Record<string, { homeScore: number | ''; awayScore: number | '' }>) {
     for (const matchId of Object.keys(predictions)) {
       const { homeScore, awayScore } = predictions[matchId];
