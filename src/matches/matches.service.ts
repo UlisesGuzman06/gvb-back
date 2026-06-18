@@ -168,19 +168,18 @@ export class MatchesService implements OnModuleInit {
       where: { matchId: id },
     });
 
-    const isDouble = match.homeTeam === 'Argentina' || match.awayTeam === 'Argentina';
-    const multiplier = isDouble ? 2 : 1;
+    const isArgentina = match.homeTeam === 'Argentina' || match.awayTeam === 'Argentina';
 
     for (const pred of predictions) {
       let points = 0;
       if (pred.homeScore === homeScore && pred.awayScore === awayScore) {
-        points = 3 * multiplier;
+        points = isArgentina ? 4 : 3;
       } else if (
         (pred.homeScore > pred.awayScore && homeScore > awayScore) ||
         (pred.homeScore < pred.awayScore && homeScore < awayScore) ||
         (pred.homeScore === pred.awayScore && homeScore === awayScore)
       ) {
-        points = 1 * multiplier;
+        points = 1;
       }
 
       await this.prisma.prediction.update({
@@ -210,19 +209,18 @@ export class MatchesService implements OnModuleInit {
       for (const p of finishedPredictions) {
         if (p.match.homeScore === null || p.match.awayScore === null) continue;
 
-        const isDouble = p.match.homeTeam === 'Argentina' || p.match.awayTeam === 'Argentina';
-        const multiplier = isDouble ? 2 : 1;
+        const isArgentina = p.match.homeTeam === 'Argentina' || p.match.awayTeam === 'Argentina';
 
         if (p.homeScore === p.match.homeScore && p.awayScore === p.match.awayScore) {
           exactMatches++;
-          totalPoints += 3 * multiplier;
+          totalPoints += isArgentina ? 4 : 3;
         } else if (
           (p.homeScore > p.awayScore && p.match.homeScore > p.match.awayScore) ||
           (p.homeScore < p.awayScore && p.match.homeScore < p.match.awayScore) ||
           (p.homeScore === p.awayScore && p.match.homeScore === p.match.awayScore)
         ) {
           trends++;
-          totalPoints += 1 * multiplier;
+          totalPoints += 1;
         }
       }
 
