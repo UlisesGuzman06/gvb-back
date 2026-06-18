@@ -40,6 +40,11 @@ export class PredictionsController {
     return this.predictionsService.getCompanionPredictions(userId, isSelf);
   }
 
+  @Get('match/:matchId')
+  async getMatchPredictions(@Param('matchId') matchId: string, @Request() req: any) {
+    return this.predictionsService.getPredictionsForMatch(matchId, req.user.userId);
+  }
+
   // Admin Overrides
   @Get('user/:userId')
   @UseGuards(AdminGuard)

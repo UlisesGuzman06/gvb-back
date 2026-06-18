@@ -7,6 +7,11 @@ export class UsersService {
 
   async findAll() {
     const list = await this.prisma.user.findMany({
+      where: {
+        role: {
+          not: 'ADMIN',
+        },
+      },
       include: {
         bonusPrediction: true,
       },

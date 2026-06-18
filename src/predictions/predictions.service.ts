@@ -10,8 +10,8 @@ export class PredictionsService {
   ) {}
 
   getLockLimit(matchDate: Date) {
-    // Close predictions 10 minutes before the match start time
-    return new Date(matchDate.getTime() - 10 * 60 * 1000);
+    // Close predictions exactly at the match start time
+    return matchDate;
   }
 
   async getUserPredictions(userId: string) {
@@ -43,13 +43,67 @@ export class PredictionsService {
       const isLocked = now.getTime() > limit.getTime() || p.match.status === 'FINISHED';
       
       map[p.matchId] = {
-        homeScore: (isLocked || isSelf) ? p.homeScore : null,
-        awayScore: (isLocked || isSelf) ? p.awayScore : null,
+        homeScore: p.homeScore,
+        awayScore: p.awayScore,
         points: p.points,
         isLocked,
       };
     }
     return map;
+  }
+
+  async getPredictionsForMatch(matchId: string, currentUserId: string) {
+    const match = await this.prisma.match.findUnique({
+      where: { id: matchId },
+    });
+    if (!match) {
+      throw new BadRequestException('Partido no encontrado');
+    }
+
+    const limit = this.getLockLimit(match.date);
+    const now = new Date();
+    const isLocked = now.getTime() > limit.getTime() || match.status === 'FINISHED';
+
+    const users = await this.prisma.user.findMany({
+      where: {
+        role: {
+          not: 'ADMIN',
+        },
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+      },
+    });
+
+    const predictions = await this.prisma.prediction.findMany({
+      where: { matchId },
+    });
+
+    const predictionsMap = new Map(predictions.map(p => [p.userId, p]));
+
+    const results = users.map(user => {
+      const p = predictionsMap.get(user.id);
+      const isSelf = user.id === currentUserId;
+
+      return {
+        userId: user.id,
+        userName: user.name,
+        userEmail: user.email,
+        homeScore: p ? p.homeScore : null,
+        awayScore: p ? p.awayScore : null,
+        hasPrediction: !!p,
+        isLocked,
+        isSelf,
+      };
+    });
+
+    return results.sort((a, b) => {
+      if (a.isSelf) return -1;
+      if (b.isSelf) return 1;
+      return a.userName.localeCompare(b.userName);
+    });
   }
 
   async savePredictions(userId: string, predictions: Record<string, { homeScore: number | ''; awayScore: number | '' }>) {
