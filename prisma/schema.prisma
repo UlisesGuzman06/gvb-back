@@ -91,4 +91,33 @@ model TournamentConfig {
   updatedAt   DateTime @default(now()) @updatedAt
 }
 
+enum PlayerPosition {
+  Goalkeeper
+  Defender
+  Midfielder
+  Attacker
+  Coach
+}
+
+model Player {
+  id        Int            @id
+  name      String
+  number    Int?
+  age       Int?
+  photo     String?
+  position  PlayerPosition
+  teamId    Int
+  teamName  String
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @default(now()) @updatedAt
+
+  @@index([teamId])
+}
+
+model TeamSquadSync {
+  teamId    Int      @id
+  syncedAt  DateTime @default(now())
+}
+
+
 

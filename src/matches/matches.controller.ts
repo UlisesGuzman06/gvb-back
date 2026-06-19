@@ -12,10 +12,21 @@ export class MatchesController {
     return this.matchesService.manualSeed(true);
   }
 
+  @Get('sync')
+  async syncMatches() {
+    return this.matchesService.syncMatchesWithApi(true);
+  }
+
+
   // Public - used by home page and prode page (unauthenticated users can see the fixture)
   @Get()
   async getMatches() {
     return this.matchesService.findAll();
+  }
+
+  @Get('teams/:id/squad')
+  async getTeamSquad(@Param('id') id: string) {
+    return this.matchesService.getTeamSquad(Number(id));
   }
 
   // Public - used by admin page to load tournament config
