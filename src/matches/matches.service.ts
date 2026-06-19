@@ -60,6 +60,17 @@ export class MatchesService implements OnModuleInit {
     this.loadLogos();
     await this.manualSeed(false);
     
+    // Recalculate all users points asynchronously on startup to fix historical data without blocking NestJS
+    setTimeout(async () => {
+      try {
+        console.log('[MatchesService] Starting asynchronous points recalculation...');
+        await this.recalculateAllUsersPoints();
+        console.log('[MatchesService] Asynchronous points recalculation completed.');
+      } catch (err) {
+        console.error('[MatchesService] Asynchronous points recalculation failed:', err);
+      }
+    }, 1000);
+    
     // Initial sync after startup
     setTimeout(() => {
       this.syncMatchesWithApi().catch(err => {
@@ -399,27 +410,36 @@ export class MatchesService implements OnModuleInit {
         include: { match: true },
       });
 
-      const finishedPredictions = predictions.filter(p => p.match.status === 'FINISHED');
-
       let totalPoints = 0;
       let exactMatches = 0;
       let trends = 0;
 
-      for (const p of finishedPredictions) {
-        if (p.match.homeScore === null || p.match.awayScore === null) continue;
+      for (const p of predictions) {
+        let calculatedPoints = 0;
 
-        const isArgentina = p.match.homeTeam === 'Argentina' || p.match.awayTeam === 'Argentina';
+        if (p.match.status === 'FINISHED' && p.match.homeScore !== null && p.match.awayScore !== null) {
+          const isArgentina = p.match.homeTeam === 'Argentina' || p.match.awayTeam === 'Argentina';
 
-        if (p.homeScore === p.match.homeScore && p.awayScore === p.match.awayScore) {
-          exactMatches++;
-          totalPoints += isArgentina ? 4 : 3;
-        } else if (
-          (p.homeScore > p.awayScore && p.match.homeScore > p.match.awayScore) ||
-          (p.homeScore < p.awayScore && p.match.homeScore < p.match.awayScore) ||
-          (p.homeScore === p.awayScore && p.match.homeScore === p.match.awayScore)
-        ) {
-          trends++;
-          totalPoints += 1;
+          if (p.homeScore === p.match.homeScore && p.awayScore === p.match.awayScore) {
+            exactMatches++;
+            calculatedPoints = isArgentina ? 4 : 3;
+            totalPoints += calculatedPoints;
+          } else if (
+            (p.homeScore > p.awayScore && p.match.homeScore > p.match.awayScore) ||
+            (p.homeScore < p.awayScore && p.match.homeScore < p.match.awayScore) ||
+            (p.homeScore === p.awayScore && p.match.homeScore === p.match.awayScore)
+          ) {
+            trends++;
+            calculatedPoints = 1;
+            totalPoints += calculatedPoints;
+          }
+        }
+
+        if (p.points !== calculatedPoints) {
+          await this.prisma.prediction.update({
+            where: { id: p.id },
+            data: { points: calculatedPoints },
+          });
         }
       }
 
