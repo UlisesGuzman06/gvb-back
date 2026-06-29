@@ -914,10 +914,10 @@ export class MatchesService implements OnModuleInit {
   async recalculateKnockoutPropagation() {
     const KNOCKOUT_INITIAL_MAP: Record<number, { homeTeam: string; awayTeam: string }> = {
       73: { homeTeam: "Sudáfrica", awayTeam: "Canadá" },
-      74: { homeTeam: "Alemania", awayTeam: "Suecia" },
+      74: { homeTeam: "Alemania", awayTeam: "Paraguay" },
       75: { homeTeam: "Países Bajos", awayTeam: "Marruecos" },
       76: { homeTeam: "Brasil", awayTeam: "Japón" },
-      77: { homeTeam: "Francia", awayTeam: "Paraguay" },
+      77: { homeTeam: "Francia", awayTeam: "Suecia" },
       78: { homeTeam: "Costa de Marfil", awayTeam: "Noruega" },
       79: { homeTeam: "México", awayTeam: "Senegal" },
       80: { homeTeam: "Inglaterra", awayTeam: "RD Congo" },
