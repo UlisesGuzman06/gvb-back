@@ -43,6 +43,14 @@ export class MatchesController {
     return this.matchesService.updateTournamentResults(body);
   }
 
+  @Patch('bulk-results')
+  @UseGuards(JwtAuthGuard, AdminGuard)
+  async updateResultsBulk(
+    @Body() body: { results: { id: string; homeScore: number; awayScore: number }[] },
+  ) {
+    return this.matchesService.updateResultsBulk(body.results);
+  }
+
   @Patch(':id/result')
   @UseGuards(JwtAuthGuard, AdminGuard)
   async updateResult(

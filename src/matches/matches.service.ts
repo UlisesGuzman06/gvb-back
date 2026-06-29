@@ -65,25 +65,15 @@ export class MatchesService implements OnModuleInit {
       try {
         console.log('[MatchesService] Starting asynchronous points recalculation...');
         await this.recalculateAllUsersPoints();
+        await this.recalculateKnockoutPropagation();
         console.log('[MatchesService] Asynchronous points recalculation completed.');
       } catch (err) {
         console.error('[MatchesService] Asynchronous points recalculation failed:', err);
       }
     }, 1000);
-    
-    // Initial sync after startup
-    setTimeout(() => {
-      this.syncMatchesWithApi().catch(err => {
-        console.error('[MatchesService] Initial sync failed:', err);
-      });
-    }, 5000);
 
-    // Periodic sync every 10 minutes
-    setInterval(() => {
-      this.syncMatchesWithApi().catch(err => {
-        console.error('[MatchesService] Background API-Football sync failed:', err);
-      });
-    }, 10 * 60 * 1000);
+    // NOTE: Auto-sync con API-Football deshabilitado (plan Free no da acceso a season 2026).
+    // Para sincronizar manualmente, usar GET /matches/sync desde el panel de admin.
   }
 
   async manualSeed(force = false) {
@@ -341,6 +331,7 @@ export class MatchesService implements OnModuleInit {
 
       return {
         id: m.id,
+        num: m.num,
         date: m.date.toISOString().split('T')[0],
         time: m.date.toISOString().split('T')[1].substring(0, 8),
         location: m.location || 'Estadio Azteca',
@@ -399,6 +390,7 @@ export class MatchesService implements OnModuleInit {
     }
 
     await this.recalculateAllUsersPoints();
+    await this.recalculateKnockoutPropagation();
     return match;
   }
 
@@ -550,7 +542,7 @@ export class MatchesService implements OnModuleInit {
           'Portugal': 'https://media.api-sports.io/football/teams/27.png',
           'Túnez': 'https://media.api-sports.io/football/teams/28.png',
           'Costa Rica': 'https://media.api-sports.io/football/teams/29.png',
-          'Egipto': 'https://media.api-sports.io/football/teams/30.png',
+          'Egipto': 'https://media.api-sports.io/football/teams/32.png',
           'Marruecos': 'https://media.api-sports.io/football/teams/31.png',
           'Costa de Marfil': 'https://media.api-sports.io/football/teams/1501.png',
           'Ghana': 'https://media.api-sports.io/football/teams/1504.png',
@@ -568,7 +560,8 @@ export class MatchesService implements OnModuleInit {
           'Cabo Verde': 'https://media.api-sports.io/football/teams/1533.png',
           'República Checa': 'https://media.api-sports.io/football/teams/770.png',
           'Haití': 'https://media.api-sports.io/football/teams/2386.png',
-          'Nueva Zelanda': 'https://media.api-sports.io/football/teams/1716.png',
+          'Nueva Zelanda': 'https://media.api-sports.io/football/teams/4673.png',
+          'Irán': 'https://media.api-sports.io/football/teams/22.png',
           'Irak': 'https://media.api-sports.io/football/teams/1567.png',
           'Noruega': 'https://media.api-sports.io/football/teams/1090.png',
           'Argelia': 'https://media.api-sports.io/football/teams/1532.png',
@@ -754,6 +747,10 @@ export class MatchesService implements OnModuleInit {
         this.saveLogos();
       }
 
+      if (updatedCount > 0) {
+        await this.recalculateKnockoutPropagation();
+      }
+
       const msg = `[API-Football Sync] Completed. Updated ${updatedCount} matches. Logos updated: ${logosUpdated}`;
       console.log(msg);
       return { success: true, message: msg };
@@ -911,6 +908,171 @@ export class MatchesService implements OnModuleInit {
     } catch (error: any) {
       console.error(`[MatchesService ERROR] Failed to fetch/save squad for team ${teamId}:`, error.message || error);
       return [];
+    }
+  }
+
+  async recalculateKnockoutPropagation() {
+    const KNOCKOUT_INITIAL_MAP: Record<number, { homeTeam: string; awayTeam: string }> = {
+      73: { homeTeam: "Sudáfrica", awayTeam: "Canadá" },
+      74: { homeTeam: "Alemania", awayTeam: "Suecia" },
+      75: { homeTeam: "Países Bajos", awayTeam: "Marruecos" },
+      76: { homeTeam: "Brasil", awayTeam: "Japón" },
+      77: { homeTeam: "Francia", awayTeam: "Paraguay" },
+      78: { homeTeam: "Costa de Marfil", awayTeam: "Noruega" },
+      79: { homeTeam: "México", awayTeam: "Senegal" },
+      80: { homeTeam: "Inglaterra", awayTeam: "RD Congo" },
+      81: { homeTeam: "Estados Unidos", awayTeam: "Bosnia y Herzegovina" },
+      82: { homeTeam: "Bélgica", awayTeam: "Argelia" },
+      83: { homeTeam: "Portugal", awayTeam: "Croacia" },
+      84: { homeTeam: "España", awayTeam: "Austria" },
+      85: { homeTeam: "Suiza", awayTeam: "Ecuador" },
+      86: { homeTeam: "Argentina", awayTeam: "Cabo Verde" },
+      87: { homeTeam: "Colombia", awayTeam: "Ghana" },
+      88: { homeTeam: "Australia", awayTeam: "Egipto" },
+      89: { homeTeam: "W74", awayTeam: "W77" },
+      90: { homeTeam: "W73", awayTeam: "W75" },
+      91: { homeTeam: "W76", awayTeam: "W78" },
+      92: { homeTeam: "W79", awayTeam: "W80" },
+      93: { homeTeam: "W83", awayTeam: "W84" },
+      94: { homeTeam: "W81", awayTeam: "W82" },
+      95: { homeTeam: "W86", awayTeam: "W88" },
+      96: { homeTeam: "W85", awayTeam: "W87" },
+      97: { homeTeam: "W89", awayTeam: "W90" },
+      98: { homeTeam: "W93", awayTeam: "W94" },
+      99: { homeTeam: "W91", awayTeam: "W92" },
+      100: { homeTeam: "W95", awayTeam: "W96" },
+      101: { homeTeam: "W97", awayTeam: "W98" },
+      102: { homeTeam: "W99", awayTeam: "W100" },
+      103: { homeTeam: "L101", awayTeam: "L102" },
+      104: { homeTeam: "W101", awayTeam: "W102" },
+    };
+
+    console.log('[MatchesService] Starting knockout winner propagation recalculation...');
+
+    try {
+      const knockoutMatches = await this.prisma.match.findMany({
+        where: { num: { gte: 73, lte: 104 } },
+      });
+
+      const matchMap = new Map<number, typeof knockoutMatches[0]>();
+      knockoutMatches.forEach(m => {
+        if (m.num !== null) matchMap.set(m.num, m);
+      });
+
+      const resolvedTeams: Record<number, { homeTeam: string; awayTeam: string }> = {};
+      for (const num of Object.keys(KNOCKOUT_INITIAL_MAP).map(Number)) {
+        resolvedTeams[num] = { ...KNOCKOUT_INITIAL_MAP[num] };
+      }
+
+      for (let num = 73; num <= 104; num++) {
+        const match = matchMap.get(num);
+        if (!match) continue;
+
+        const home = resolvedTeams[num].homeTeam;
+        const away = resolvedTeams[num].awayTeam;
+
+        if (match.status === 'FINISHED' && match.homeScore !== null && match.awayScore !== null) {
+          let winner = '';
+          let loser = '';
+          if (match.homeScore > match.awayScore) {
+            winner = home;
+            loser = away;
+          } else if (match.awayScore > match.homeScore) {
+            winner = away;
+            loser = home;
+          } else {
+            // Draw fallback
+            winner = `${home} (Pen)`;
+            loser = `${away} (Pen)`;
+          }
+
+          const wPlaceholder = `W${num}`;
+          const lPlaceholder = `L${num}`;
+
+          for (let nextNum = num + 1; nextNum <= 104; nextNum++) {
+            if (resolvedTeams[nextNum].homeTeam === wPlaceholder) {
+              resolvedTeams[nextNum].homeTeam = winner;
+            }
+            if (resolvedTeams[nextNum].homeTeam === lPlaceholder) {
+              resolvedTeams[nextNum].homeTeam = loser;
+            }
+            if (resolvedTeams[nextNum].awayTeam === wPlaceholder) {
+              resolvedTeams[nextNum].awayTeam = winner;
+            }
+            if (resolvedTeams[nextNum].awayTeam === lPlaceholder) {
+              resolvedTeams[nextNum].awayTeam = loser;
+            }
+          }
+        }
+      }
+
+      for (let num = 73; num <= 104; num++) {
+        const match = matchMap.get(num);
+        if (!match) continue;
+        const resolved = resolvedTeams[num];
+        if (match.homeTeam !== resolved.homeTeam || match.awayTeam !== resolved.awayTeam) {
+          await this.prisma.match.update({
+            where: { id: match.id },
+            data: {
+              homeTeam: resolved.homeTeam,
+              awayTeam: resolved.awayTeam,
+            }
+          });
+          console.log(`[MatchesService] Propagated bracket team update for Match #${num}: ${resolved.homeTeam} vs ${resolved.awayTeam}`);
+        }
+      }
+      console.log('[MatchesService] Knockout winner propagation recalculation completed.');
+    } catch (err) {
+      console.error('[MatchesService Error] Failed to propagate knockout winners:', err);
+    }
+  }
+
+  async updateResultsBulk(results: { id: string; homeScore: number; awayScore: number }[]) {
+    console.log(`[MatchesService] Starting bulk results update for ${results.length} matches...`);
+    try {
+      for (const res of results) {
+        const match = await this.prisma.match.update({
+          where: { id: res.id },
+          data: {
+            homeScore: res.homeScore,
+            awayScore: res.awayScore,
+            status: 'FINISHED',
+          },
+        });
+
+        const predictions = await this.prisma.prediction.findMany({
+          where: { matchId: res.id },
+        });
+
+        const isArgentina = match.homeTeam === 'Argentina' || match.awayTeam === 'Argentina';
+
+        for (const pred of predictions) {
+          let points = 0;
+          if (pred.homeScore === res.homeScore && pred.awayScore === res.awayScore) {
+            points = isArgentina ? 4 : 3;
+          } else if (
+            (pred.homeScore > pred.awayScore && res.homeScore > res.awayScore) ||
+            (pred.homeScore < pred.awayScore && res.homeScore < res.awayScore) ||
+            (pred.homeScore === pred.awayScore && res.homeScore === res.awayScore)
+          ) {
+            points = 1;
+          }
+
+          await this.prisma.prediction.update({
+            where: { id: pred.id },
+            data: { points },
+          });
+        }
+      }
+
+      await this.recalculateAllUsersPoints();
+      await this.recalculateKnockoutPropagation();
+
+      console.log('[MatchesService] Bulk results update completed successfully.');
+      return { success: true, count: results.length };
+    } catch (error: any) {
+      console.error('[MatchesService Error] Bulk results update failed:', error);
+      throw error;
     }
   }
 }
