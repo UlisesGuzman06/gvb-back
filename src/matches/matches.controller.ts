@@ -46,7 +46,7 @@ export class MatchesController {
   @Patch('bulk-results')
   @UseGuards(JwtAuthGuard, AdminGuard)
   async updateResultsBulk(
-    @Body() body: { results: { id: string; homeScore: number; awayScore: number }[] },
+    @Body() body: { results: { id: string; homeScore: number; awayScore: number; penaltyWinner?: string }[] },
   ) {
     return this.matchesService.updateResultsBulk(body.results);
   }
@@ -55,9 +55,9 @@ export class MatchesController {
   @UseGuards(JwtAuthGuard, AdminGuard)
   async updateResult(
     @Param('id') id: string,
-    @Body() body: { homeScore: number; awayScore: number },
+    @Body() body: { homeScore: number; awayScore: number; penaltyWinner?: string },
   ) {
-    return this.matchesService.updateResult(id, body.homeScore, body.awayScore);
+    return this.matchesService.updateResult(id, body.homeScore, body.awayScore, body.penaltyWinner);
   }
 }
 

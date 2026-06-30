@@ -351,16 +351,18 @@ export class MatchesService implements OnModuleInit {
         homeScore: m.homeScore,
         awayScore: m.awayScore,
         status: m.status,
+        penaltyWinner: m.penaltyWinner,
       };
     });
   }
 
-  async updateResult(id: string, homeScore: number, awayScore: number) {
+  async updateResult(id: string, homeScore: number, awayScore: number, penaltyWinner?: string) {
     const match = await this.prisma.match.update({
       where: { id },
       data: {
         homeScore,
         awayScore,
+        penaltyWinner: penaltyWinner !== undefined ? penaltyWinner : null,
         status: 'FINISHED',
       },
     });
@@ -395,57 +397,78 @@ export class MatchesService implements OnModuleInit {
   }
 
   async recalculateAllUsersPoints() {
-    const users = await this.prisma.user.findMany();
-    for (const user of users) {
-      const predictions = await this.prisma.prediction.findMany({
-        where: { userId: user.id },
+    console.log('[MatchesService] Recalculating all users points...');
+    try {
+      // 1. Fetch all users
+      const users = await this.prisma.user.findMany();
+
+      // 2. Fetch tournament config once
+      const config = await this.prisma.tournamentConfig.findUnique({
+        where: { id: 'global' },
+      });
+
+      // 3. Fetch all bonus predictions once
+      const bonusList = await this.prisma.bonusPrediction.findMany();
+      const bonusMap = new Map(bonusList.map(b => [b.userId, b]));
+
+      // 4. Fetch all predictions once, including their matches
+      const allPredictions = await this.prisma.prediction.findMany({
         include: { match: true },
       });
 
-      let totalPoints = 0;
-      let exactMatches = 0;
-      let trends = 0;
+      // Group predictions by userId
+      const predictionsByUser = new Map<string, typeof allPredictions>();
+      for (const p of allPredictions) {
+        if (!predictionsByUser.has(p.userId)) {
+          predictionsByUser.set(p.userId, []);
+        }
+        predictionsByUser.get(p.userId)!.push(p);
+      }
 
-      for (const p of predictions) {
-        let calculatedPoints = 0;
+      const predictionUpdates: any[] = [];
+      const userUpdates: any[] = [];
 
-        if (p.match.status === 'FINISHED' && p.match.homeScore !== null && p.match.awayScore !== null) {
-          const isArgentina = p.match.homeTeam === 'Argentina' || p.match.awayTeam === 'Argentina';
+      for (const user of users) {
+        const predictions = predictionsByUser.get(user.id) || [];
 
-          if (p.homeScore === p.match.homeScore && p.awayScore === p.match.awayScore) {
-            exactMatches++;
-            calculatedPoints = isArgentina ? 4 : 3;
-            totalPoints += calculatedPoints;
-          } else if (
-            (p.homeScore > p.awayScore && p.match.homeScore > p.match.awayScore) ||
-            (p.homeScore < p.awayScore && p.match.homeScore < p.match.awayScore) ||
-            (p.homeScore === p.awayScore && p.match.homeScore === p.match.awayScore)
-          ) {
-            trends++;
-            calculatedPoints = 1;
-            totalPoints += calculatedPoints;
+        let totalPoints = 0;
+        let exactMatches = 0;
+        let trends = 0;
+
+        for (const p of predictions) {
+          let calculatedPoints = 0;
+
+          if (p.match.status === 'FINISHED' && p.match.homeScore !== null && p.match.awayScore !== null) {
+            const isArgentina = p.match.homeTeam === 'Argentina' || p.match.awayTeam === 'Argentina';
+
+            if (p.homeScore === p.match.homeScore && p.awayScore === p.match.awayScore) {
+              exactMatches++;
+              calculatedPoints = isArgentina ? 4 : 3;
+              totalPoints += calculatedPoints;
+            } else if (
+              (p.homeScore > p.awayScore && p.match.homeScore > p.match.awayScore) ||
+              (p.homeScore < p.awayScore && p.match.homeScore < p.match.awayScore) ||
+              (p.homeScore === p.awayScore && p.match.homeScore === p.match.awayScore)
+            ) {
+              trends++;
+              calculatedPoints = 1;
+              totalPoints += calculatedPoints;
+            }
+          }
+
+          if (p.points !== calculatedPoints) {
+            predictionUpdates.push(
+              this.prisma.prediction.update({
+                where: { id: p.id },
+                data: { points: calculatedPoints },
+              })
+            );
           }
         }
 
-        if (p.points !== calculatedPoints) {
-          await this.prisma.prediction.update({
-            where: { id: p.id },
-            data: { points: calculatedPoints },
-          });
-        }
-      }
-
-      const bonus = await this.prisma.bonusPrediction.findUnique({
-        where: { userId: user.id },
-      });
-
-      let bonusPoints = 0;
-      if (bonus) {
-        const config = await this.prisma.tournamentConfig.findUnique({
-          where: { id: 'global' },
-        });
-
-        if (config) {
+        const bonus = bonusMap.get(user.id);
+        let bonusPoints = 0;
+        if (bonus && config) {
           if (config.champion && bonus.champion === config.champion) {
             bonusPoints += 15;
           }
@@ -462,17 +485,48 @@ export class MatchesService implements OnModuleInit {
             bonusPoints += 10;
           }
         }
+
+        const newPoints = totalPoints + bonusPoints;
+        if (
+          user.points !== newPoints ||
+          user.exactMatches !== exactMatches ||
+          user.trends !== trends ||
+          user.bonusPoints !== bonusPoints
+        ) {
+          userUpdates.push(
+            this.prisma.user.update({
+              where: { id: user.id },
+              data: {
+                points: newPoints,
+                exactMatches,
+                trends,
+                bonusPoints,
+              },
+            })
+          );
+        }
       }
 
-      await this.prisma.user.update({
-        where: { id: user.id },
-        data: {
-          points: totalPoints + bonusPoints,
-          exactMatches,
-          trends,
-          bonusPoints,
-        },
-      });
+      // Execute all updates in chunks/transactions to avoid locking or timeouts
+      if (predictionUpdates.length > 0) {
+        console.log(`[MatchesService] Batch updating ${predictionUpdates.length} predictions...`);
+        for (let i = 0; i < predictionUpdates.length; i += 50) {
+          const chunk = predictionUpdates.slice(i, i + 50);
+          await this.prisma.$transaction(chunk);
+        }
+      }
+
+      if (userUpdates.length > 0) {
+        console.log(`[MatchesService] Batch updating ${userUpdates.length} users...`);
+        for (let i = 0; i < userUpdates.length; i += 50) {
+          const chunk = userUpdates.slice(i, i + 50);
+          await this.prisma.$transaction(chunk);
+        }
+      }
+
+      console.log('[MatchesService] Recalculate all users points completed.');
+    } catch (err) {
+      console.error('[MatchesService Error] Failed to recalculate user points:', err);
     }
   }
 
@@ -981,9 +1035,14 @@ export class MatchesService implements OnModuleInit {
             winner = away;
             loser = home;
           } else {
-            // Draw fallback
-            winner = `${home} (Pen)`;
-            loser = `${away} (Pen)`;
+            // Tie: Check penaltyWinner to determine who advanced
+            if (match.penaltyWinner === away) {
+              winner = `${away} (Pen)`;
+              loser = `${home} (Pen)`;
+            } else {
+              winner = `${home} (Pen)`;
+              loser = `${away} (Pen)`;
+            }
           }
 
           const wPlaceholder = `W${num}`;
@@ -1027,7 +1086,7 @@ export class MatchesService implements OnModuleInit {
     }
   }
 
-  async updateResultsBulk(results: { id: string; homeScore: number; awayScore: number }[]) {
+  async updateResultsBulk(results: { id: string; homeScore: number; awayScore: number; penaltyWinner?: string }[]) {
     console.log(`[MatchesService] Starting bulk results update for ${results.length} matches...`);
     try {
       for (const res of results) {
@@ -1036,6 +1095,7 @@ export class MatchesService implements OnModuleInit {
           data: {
             homeScore: res.homeScore,
             awayScore: res.awayScore,
+            penaltyWinner: res.penaltyWinner !== undefined ? res.penaltyWinner : null,
             status: 'FINISHED',
           },
         });
