@@ -1037,11 +1037,11 @@ export class MatchesService implements OnModuleInit {
           } else {
             // Tie: Check penaltyWinner to determine who advanced
             if (match.penaltyWinner === away) {
-              winner = `${away} (Pen)`;
-              loser = `${home} (Pen)`;
+              winner = away;
+              loser = home;
             } else {
-              winner = `${home} (Pen)`;
-              loser = `${away} (Pen)`;
+              winner = home;
+              loser = away;
             }
           }
 
